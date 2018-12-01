@@ -11,10 +11,14 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
+  "main": "index.json",
   "files": [
-    "index.js"
+    "index.json"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "mdast-zone": "^3.0.3",
+    "unist-builder": "^1.0.3"
+  },
   "devDependencies": {
     "prettier": "^1.14.2",
     "remark": "^10.0.0",
@@ -40,7 +44,8 @@
   },
   "remarkConfig": {
     "plugins": [
-      "preset-wooorm"
+      "preset-wooorm",
+      "./script/list-of-members"
     ]
   }
 }
