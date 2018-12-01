@@ -3,36 +3,24 @@
     "name": "John Otander",
     "github": "johno",
     "email": "johnotander@gmail.com",
-    "roles": [
-      "merge",
-      "release"
-    ]
+    "roles": ["merge", "release"]
   },
   {
     "name": "Nikita Sobolev",
     "github": "sobolevn",
     "email": "mail@sobolevn.me",
-    "roles": [
-      "merge"
-    ]
+    "roles": ["merge"]
   },
   {
     "name": "Titus Wormer",
     "github": "wooorm",
     "email": "tituswormer@gmail.com",
-    "roles": [
-      "lead",
-      "merge",
-      "release"
-    ]
+    "roles": ["lead", "merge", "release"]
   },
   {
     "name": "Victor Felder",
     "github": "vhf",
     "email": "victor@draft.li",
-    "roles": [
-      "merge",
-      "release"
-    ]
+    "roles": ["merge"]
   }
 ]
