@@ -38,18 +38,18 @@ with them:
 *   A main team, **members**, that governs all repositories under the
     organisation with **read** access.
     All humans are invited to this team as **member**s.
-    Humans with a `lead` role are invited to this team as **maintainers**s.
+    Humans with a `lead` role are invited to this team as **maintainer**s.
 *   An **emeriti** team, that governs all repositories under the organisation
     with **read** access.
     Humans with an `emeritus` role are invited to this team as **member**s.
-    Humans with a `lead` role are invited to this team as **maintainers**s.
+    Humans with a `lead` role are invited to this team as **maintainer**s.
 *   A **mergers** team, that governs all repositories under the organisation
     with **write** access.
     Humans with a `merge` role are invited to this team as **member**s.
-    Humans with a `lead` role are invited to this team as **maintainers**s.
+    Humans with a `lead` role are invited to this team as **maintainer**s.
 *   A **release** team, that governs all repositories under the organisation
     with **admin** access.
     Humans with a `release` role are invited to this team as **member**s.
-    Humans with a `lead` role are invited to this team as **maintainers**s.
+    Humans with a `lead` role are invited to this team as **maintainer**s.
 
 People on these teams that shouldn’t be there, are warned about or updated.
