@@ -42,7 +42,7 @@ async function teams(ctx) {
         name,
         description: interpolate(ctx, description),
         org: ctx.org,
-        parent_team_id: parent ? parent.id : undefined, // eslint-disable-line camelcase
+        parent_team_id: parentTeam ? parentTeam.id : undefined, // eslint-disable-line camelcase
         privacy: 'closed',
         headers: {accept: childTeamAccept}
       })
