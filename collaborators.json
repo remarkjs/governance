@@ -1,0 +1,20 @@
+[
+  {
+    "name": "David Herges",
+    "github": "dherges",
+    "email": "david@spektrakel.de",
+    "repos": ["remark-embed-images"]
+  },
+  {
+    "name": "Denys Dovhan",
+    "github": "denysdovhan",
+    "email": "denysdovhan@gmail.com",
+    "repos": ["remark-textr", "gulp-remark"]
+  },
+  {
+    "name": "Vincent Weevers",
+    "github": "vweevers",
+    "email": "mail@vincentweevers.nl",
+    "repos": ["remark-git-contributors"]
+  }
+]
