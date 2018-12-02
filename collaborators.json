@@ -1,20 +1,26 @@
 [
   {
-    "name": "David Herges",
-    "github": "dherges",
-    "email": "david@spektrakel.de",
-    "repos": ["remark-embed-images"]
+    "scope": "remarkjs/gulp-remark",
+    "collaborators": {
+      "denysdovhan": "Denys Dovhan <denysdovhan@gmail.com> (https://denysdovhan.com)"
+    }
   },
   {
-    "name": "Denys Dovhan",
-    "github": "denysdovhan",
-    "email": "denysdovhan@gmail.com",
-    "repos": ["remark-textr", "gulp-remark"]
+    "scope": "remarkjs/remark-embed-images",
+    "collaborators": {
+      "dherges": "David Herges <david@spektrakel.de> (https://spektrakel.de)"
+    }
   },
   {
-    "name": "Vincent Weevers",
-    "github": "vweevers",
-    "email": "mail@vincentweevers.nl",
-    "repos": ["remark-git-contributors"]
+    "scope": "remarkjs/remark-git-contributors",
+    "collaborators": {
+      "vweevers": "Vincent Weevers <mail@vincentweevers.nl> (http://vincentweevers.nl)"
+    }
+  },
+  {
+    "scope": "remarkjs/remark-textr",
+    "collaborators": {
+      "denysdovhan": "Denys Dovhan <denysdovhan@gmail.com> (https://denysdovhan.com)"
+    }
   }
 ]

@@ -1,0 +1,111 @@
+[
+  {
+    "name": "core",
+    "scope": "*/*",
+    "members": {
+      "ChristianMurphy": "admin",
+      "johno": "admin",
+      "wooorm": "admin"
+    }
+  },
+  {
+    "name": "moderation",
+    "scope": "*/*",
+    "members": {
+      "komaeda": "admin"
+    }
+  },
+  {
+    "name": "unified",
+    "scope": "unifiedjs/*",
+    "lead": "wooorm",
+    "members": {
+      "ChristianMurphy": "write",
+      "johno": "write",
+      "Murderlon": "write",
+      "vhf": "write",
+      "wooorm": "admin"
+    }
+  },
+  {
+    "name": "remark",
+    "scope": "remarkjs/*",
+    "lead": "wooorm",
+    "members": {
+      "ChristianMurphy": "write",
+      "johno": "admin",
+      "Murderlon": "write",
+      "sobolevn": "write",
+      "vhf": "write",
+      "wooorm": "admin"
+    }
+  },
+  {
+    "name": "rehype",
+    "scope": "rehypejs/*",
+    "lead": "wooorm",
+    "members": {
+      "ChristianMurphy": "write",
+      "johno": "write",
+      "Murderlon": "write",
+      "vhf": "write",
+      "wooorm": "admin"
+    }
+  },
+  {
+    "name": "retext",
+    "scope": "retextjs/*",
+    "lead": "wooorm",
+    "members": {
+      "Murderlon": "write",
+      "wooorm": "admin"
+    }
+  },
+  {
+    "name": "redot",
+    "scope": "redotjs/*",
+    "lead": "ChristianMurphy",
+    "members": {
+      "ChristianMurphy": "admin",
+      "wooorm": "admin"
+    }
+  },
+  {
+    "name": "micromark",
+    "scope": "micromark/*",
+    "lead": "wooorm",
+    "members": {
+      "Murderlon": "write",
+      "wooorm": "admin"
+    }
+  },
+  {
+    "name": "mdx",
+    "scope": "mdx-js/*",
+    "lead": "johno",
+    "members": {
+      "johno": "admin",
+      "wooorm": "write"
+    }
+  },
+  {
+    "name": "vfile",
+    "scope": "vfile/*",
+    "lead": "wooorm",
+    "members": {
+      "ChristianMurphy": "write",
+      "komaeda": "write",
+      "wooorm": "admin"
+    }
+  },
+  {
+    "name": "syntax tree",
+    "scope": "syntax-tree/*",
+    "lead": "wooorm",
+    "members": {
+      "ChristianMurphy": "write",
+      "Murderlon": "write",
+      "wooorm": "admin"
+    }
+  }
+]

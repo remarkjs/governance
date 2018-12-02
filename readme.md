@@ -7,25 +7,31 @@ We’re currently drafting that out in [unifiedjs/governance#2](https://github.c
 There’s a lot of churn around handling 200 projects with many different teams.
 I’m going to try and write some code to streamline that here.
 
-<!-- members start -->
+<!-- members-remark start -->
 
 ## Members
 
+*   Christian Murphy
+    ([**@ChristianMurphy**](https://github.com/ChristianMurphy))
+    &lt;[christian.murphy.42@gmail.com](mailto:christian.murphy.42@gmail.com)>
 *   John Otander
     ([**@johno**](https://github.com/johno))
     &lt;[johnotander@gmail.com](mailto:johnotander@gmail.com)>
+*   Merlijn Vos
+    ([**@Murderlon**](https://github.com/Murderlon))
+    &lt;[merlijn@soverin.net](mailto:merlijn@soverin.net)>
 *   Nikita Sobolev
     ([**@sobolevn**](https://github.com/sobolevn))
     &lt;[mail@sobolevn.me](mailto:mail@sobolevn.me)>
+*   Victor Felder
+    ([**@vhf**](https://github.com/vhf))
+    &lt;[victor@draft.li](mailto:victor@draft.li)>
 *   Titus Wormer
     ([**@wooorm**](https://github.com/wooorm))
     &lt;[tituswormer@gmail.com](mailto:tituswormer@gmail.com)>
     (**lead**)
-*   Victor Felder
-    ([**@vhf**](https://github.com/vhf))
-    &lt;[victor@draft.li](mailto:victor@draft.li)>
 
-<!-- members end -->
+<!-- members-remark end -->
 
 ## Working
 
@@ -47,7 +53,7 @@ with them:
     with **write** access.
     Humans with a `merge` role are invited to this team as **member**s.
     Humans with a `release` role are invited to this team as **maintainer**s.
-*   A **release** team, that governs all repositories under the organisation
+*   A **releasers** team, that governs all repositories under the organisation
     with **admin** access.
     Humans with a `release` role are invited to this team as **member**s.
     Humans with a `lead` role are invited to this team as **maintainer**s.

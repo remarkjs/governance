@@ -18,10 +18,16 @@
   ],
   "dependencies": {
     "@octokit/rest": "^16.1.0",
+    "arr-diff": "^4.0.0",
+    "dlv": "^1.1.2",
     "mdast-zone": "^3.0.3",
+    "minimatch": "^3.0.4",
+    "parse-author": "^2.0.0",
+    "trough": "^1.0.3",
     "unist-builder": "^1.0.3"
   },
   "devDependencies": {
+    "chalk": "^2.4.1",
     "prettier": "^1.14.2",
     "remark": "^10.0.0",
     "remark-cli": "^6.0.0",
@@ -43,11 +49,5 @@
   "xo": {
     "prettier": true,
     "esnext": false
-  },
-  "remarkConfig": {
-    "plugins": [
-      "preset-wooorm",
-      "./script/list-of-members"
-    ]
   }
 }
