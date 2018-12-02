@@ -1,5 +1,11 @@
 [
   {
+    "name": "Christian Murphy",
+    "github": "ChristianMurphy",
+    "email": "christian.murphy.42@gmail.com",
+    "roles": ["merge"]
+  },
+  {
     "name": "John Otander",
     "github": "johno",
     "email": "johnotander@gmail.com",
