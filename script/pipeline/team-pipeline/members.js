@@ -10,17 +10,33 @@ module.exports = members
 
 async function members({team, ctx}) {
   var {paginate, request, structure} = ctx
-  var definition = structure.find(x => x.name === team.name).humans
-  var maintainers = find(ctx, definition.maintainer)
-  var members = difference(find(ctx, definition.member), maintainers)
-  var all = members.concat(maintainers)
+  var teamStructure = structure.find(x => x.name === team.name)
+  var definition
+  var maintainers
+  var members
+  var all
+  var allTeamMembers
+  var teamMembers
 
-  var allTeamMembers = await paginate('GET /teams/:team/members', {
+  if (!teamStructure) {
+    console.log(
+      '  ' + chalk.blue('ℹ') + ' ignoring members of unstructured team %s',
+      team.name
+    )
+    return
+  }
+
+  definition = teamStructure.humans
+  maintainers = find(ctx, definition.maintainer)
+  members = difference(find(ctx, definition.member), maintainers)
+  all = members.concat(maintainers)
+
+  allTeamMembers = await paginate('GET /teams/:team/members', {
     team: team.id,
     headers: {accept: childTeamAccept}
   }).then(users)
 
-  var teamMembers = await Promise.all(
+  teamMembers = await Promise.all(
     allTeamMembers.map(({name}) =>
       request('GET /teams/:team/memberships/:name', {
         team: team.id,

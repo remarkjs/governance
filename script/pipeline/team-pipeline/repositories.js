@@ -11,11 +11,27 @@ module.exports = repositories
 async function repositories({team, ctx}) {
   var {org, structure, ghRepos, request, paginate} = ctx
   var headers = {accept: childTeamAccept}
-  var definition = structure.find(x => x.name === team.name).repositories
-  var right = definition.right
-  var match = new Minimatch(interpolate(ctx, definition.scope))
-  var expected = ghRepos.filter(repo => match.match(full(repo)))
-  var teamRepos = await paginate('GET /teams/:team/repos', {
+  var teamStructure = structure.find(x => x.name === team.name)
+  var definition
+  var right
+  var match
+  var expected
+  var teamRepos
+
+  if (!teamStructure) {
+    console.log(
+      '  ' + chalk.blue('ℹ') + ' ignoring repos of unstructured team %s',
+      team.name
+    )
+    return
+  }
+
+  definition = teamStructure.repositories
+  right = definition.right
+  match = new Minimatch(interpolate(ctx, definition.scope))
+  expected = ghRepos.filter(repo => match.match(full(repo)))
+
+  teamRepos = await paginate('GET /teams/:team/repos', {
     team: team.id,
     headers
   }).then(repos)
