@@ -20,6 +20,9 @@ I’m going to try and write some code to streamline that here.
 *   Merlijn Vos
     ([**@Murderlon**](https://github.com/Murderlon))
     &lt;[merlijn@soverin.net](mailto:merlijn@soverin.net)>
+*   Junyoung Choi
+    ([**@Rokt33r**](https://github.com/Rokt33r))
+    &lt;[fluke8259@gmail.com](mailto:fluke8259@gmail.com)>
 *   Nikita Sobolev
     ([**@sobolevn**](https://github.com/sobolevn))
     &lt;[mail@sobolevn.me](mailto:mail@sobolevn.me)>
@@ -30,6 +33,9 @@ I’m going to try and write some code to streamline that here.
     ([**@wooorm**](https://github.com/wooorm))
     &lt;[tituswormer@gmail.com](mailto:tituswormer@gmail.com)>
     (**lead**)
+*   Zeke Sikelianos
+    ([**@zeke**](https://github.com/zeke))
+    &lt;[zeke@sikelianos.com](mailto:zeke@sikelianos.com)>
 
 <!-- members-remark end -->
 
