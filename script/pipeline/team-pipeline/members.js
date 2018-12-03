@@ -43,8 +43,13 @@ async function members({team, ctx}) {
 
   // Current members with wrong roles.
   teamMembers.forEach(({role, name}) => {
-    var admins = find(ctx, 'core/*').concat(maintainers)
-    var expected = admins.includes(name) ? 'maintainer' : 'member'
+    var expected = maintainers.includes(name) ? 'maintainer' : 'member'
+
+    // Core team members are always maintainers, regardless of what’s otherwise
+    // expected.
+    if (find(ctx, 'core/*')) {
+      return
+    }
 
     if (expected !== role) {
       console.log(
