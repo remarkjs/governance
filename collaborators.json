@@ -22,5 +22,21 @@
     "collaborators": {
       "denysdovhan": "Denys Dovhan <denysdovhan@gmail.com> (https://denysdovhan.com)"
     }
+  },
+  {
+    "scope": "vfile/vfile-reporter-pretty",
+    "collaborators": {
+      "sindresorhus": "Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)",
+      "kevva": "Kevin Mårtensson <kevinmartensson@gmail.com>",
+      "SamVerschueren": "Sam Verschueren <sam.verschueren@gmail.com>"
+    }
+  },
+  {
+    "scope": "vfile/vfile-to-eslint",
+    "collaborators": {
+      "sindresorhus": "Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)",
+      "kevva": "Kevin Mårtensson <kevinmartensson@gmail.com>",
+      "SamVerschueren": "Sam Verschueren <sam.verschueren@gmail.com>"
+    }
   }
 ]
