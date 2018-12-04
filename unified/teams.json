@@ -5,7 +5,8 @@
     "members": {
       "ChristianMurphy": "admin",
       "johno": "admin",
-      "wooorm": "admin"
+      "wooorm": "admin",
+      "zcei": "admin"
     }
   },
   {
@@ -24,7 +25,8 @@
       "johno": "write",
       "Murderlon": "write",
       "vhf": "write",
-      "wooorm": "admin"
+      "wooorm": "admin",
+      "zcei": "write"
     }
   },
   {
@@ -80,7 +82,8 @@
       "johno": "write",
       "Murderlon": "write",
       "vhf": "write",
-      "wooorm": "admin"
+      "wooorm": "admin",
+      "zcei": "write"
     }
   },
   {
@@ -91,7 +94,8 @@
       "ChristopherBiscardi": "write",
       "johno": "admin",
       "ticky": "emeritus",
-      "wooorm": "write"
+      "wooorm": "write",
+      "zcei": "write"
     }
   },
   {
