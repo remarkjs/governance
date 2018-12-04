@@ -5,6 +5,7 @@
     "members": {
       "ChristianMurphy": "admin",
       "johno": "admin",
+      "RichardLitt": "admin",
       "wooorm": "admin",
       "zcei": "admin"
     }
@@ -62,6 +63,7 @@
     "lead": "wooorm",
     "members": {
       "Murderlon": "write",
+      "RichardLitt": "write",
       "wooorm": "admin"
     }
   },
