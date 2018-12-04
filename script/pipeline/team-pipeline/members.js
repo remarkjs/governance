@@ -63,7 +63,7 @@ async function members({team, ctx}) {
 
     // Core team members are always maintainers, regardless of what’s otherwise
     // expected.
-    if (find(ctx, 'core/*')) {
+    if (find(ctx, 'core/!emeritus')) {
       return
     }
 

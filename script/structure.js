@@ -29,12 +29,12 @@ module.exports = [
     name: 'moderators',
     description: 'The @:collective collective moderation team',
     repositories: {scope: ':org/*', right: 'admin'},
-    humans: {member: 'moderation/*', maintainer: ':orgTeam/lead'}
+    humans: {member: 'moderation/!emeritus', maintainer: ':orgTeam/lead'}
   },
   {
     name: 'core',
     description: 'The @:collective collective core team',
     repositories: {scope: ':org/*', right: 'admin'},
-    humans: {member: 'core/*', maintainer: ':orgTeam/lead'}
+    humans: {member: 'core/!emeritus', maintainer: ':orgTeam/lead'}
   }
 ]

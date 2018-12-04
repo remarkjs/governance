@@ -10,7 +10,7 @@ module.exports = members
 async function members(ctx) {
   var {org, request, structure} = ctx
   console.log(chalk.bold('members') + ' for %s', org)
-  var admins = find(ctx, 'core/*')
+  var admins = find(ctx, 'core/!emeritus')
   var defs = structure.map(({humans}) => [humans.member, humans.maintainer])
   var groups = concat.apply([], concat.apply([], defs).map(x => find(ctx, x)))
   var users = [...new Set(groups)]
