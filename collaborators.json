@@ -24,6 +24,18 @@
     }
   },
   {
+    "scope": "syntax-tree/hast-util-to-dom",
+    "collaborators": {
+      "kmck": "Keith McKnight <keith@mcknig.ht> (https://mcknig.ht)"
+    }
+  },
+  {
+    "scope": "syntax-tree/hast-util-from-dom",
+    "collaborators": {
+      "kmck": "Keith McKnight <keith@mcknig.ht> (https://mcknig.ht)"
+    }
+  },
+  {
     "scope": "vfile/vfile-reporter-pretty",
     "collaborators": {
       "sindresorhus": "Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)",
