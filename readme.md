@@ -36,6 +36,9 @@ I’m going to try and write some code to streamline that here.
 *   Zeke Sikelianos
     ([**@zeke**](https://github.com/zeke))
     &lt;[zeke@sikelianos.com](mailto:zeke@sikelianos.com)>
+*   Mudit Ameta
+    ([**@zeusdeux**](https://github.com/zeusdeux))
+    &lt;[zeusdeux@gmail.com](mailto:zeusdeux@gmail.com)>
 
 <!-- members-remark end -->
 
