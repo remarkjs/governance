@@ -23,7 +23,39 @@ function configure(config) {
   return {
     ...config,
     orgTeam: team.name,
-    request,
-    paginate
+    request: wrap(request),
+    paginate: wrap(paginate)
+  }
+}
+
+function wrap(fn) {
+  return wrapped
+
+  function wrapped() {
+    var args = [...arguments]
+
+    return attempt().catch(retry)
+
+    function attempt() {
+      return fn.apply(null, args)
+    }
+
+    function retry(err) {
+      var after = err && err.status === 403 ? err.headers['retry-after'] : null
+
+      if (!after) {
+        throw err
+      }
+
+      return new Promise(executor)
+
+      function executor(resolve, reject) {
+        setTimeout(delayed, parseInt(after, 10) * 1000)
+
+        function delayed() {
+          attempt().then(resolve, reject)
+        }
+      }
+    }
   }
 }
