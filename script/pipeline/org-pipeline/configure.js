@@ -1,6 +1,7 @@
 'use strict'
 
-var octo = require('@octokit/rest')
+var rest = require('@octokit/rest')
+var graphql = require('@octokit/graphql')
 
 module.exports = configure
 
@@ -18,11 +19,13 @@ function configure(config) {
     throw new Error('Could not find team belonging to `' + org + '`')
   }
 
-  var {request, paginate} = octo({headers: {authorization: 'token ' + token}})
+  var query = graphql.defaults({headers: {authorization: 'token ' + token}})
+  var {request, paginate} = rest({headers: {authorization: 'token ' + token}})
 
   return {
     ...config,
     orgTeam: team.name,
+    query: wrap(query),
     request: wrap(request),
     paginate: wrap(paginate)
   }
@@ -41,6 +44,7 @@ function wrap(fn) {
     }
 
     function retry(err) {
+      console.log('wrap err: ', err)
       var after = err && err.status === 403 ? err.headers['retry-after'] : null
 
       if (!after) {
