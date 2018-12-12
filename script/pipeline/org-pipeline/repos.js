@@ -12,26 +12,30 @@ async function repos(ctx) {
 
   console.log(chalk.bold('repos') + ' for %s', org)
 
-  // To do: paginate.
-  const {data} = await query(
-    `
-      query($org: String!) {
-        organization(login: $org) {
-          repositories(first: 100) {
-            nodes {
-              defaultBranchRef {
-                name
-              }
-              name
-            }
-          }
-        }
-      }
-    `,
-    {org}
-  )
+  // // To do: paginate.
+  // const {data} = await query(
+  //   `
+  //     query($org: String!) {
+  //       organization(login: $org) {
+  //         repositories(first: 100) {
+  //           nodes {
+  //             defaultBranchRef {
+  //               name
+  //             }
+  //             name
+  //           }
+  //         }
+  //       }
+  //     }
+  //   `,
+  //   {org}
+  // )
+  //
+  // const repositories = data.organization.repositories.nodes
 
-  const repositories = data.organization.repositories.nodes
+  const repositories = [
+    {name: 'remark-git-contributors', defaultBranchRef: {name: 'master'}}
+  ]
 
   await pSeries(repositories.map(repo => () => run({ctx, repo})))
 }

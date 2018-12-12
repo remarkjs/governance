@@ -8,6 +8,6 @@ var repos = require('./repos')
 
 module.exports = trough()
   .use(configure)
-  .use(members)
-  .use(teams)
+  // .use(members)
+  // .use(teams)
   .use(repos)

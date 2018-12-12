@@ -4,9 +4,9 @@ var chalk = require('chalk')
 var minimatch = require('minimatch')
 var interpolate = require('../util/interpolate')
 
-module.exports = repositories
+module.exports = collaborators
 
-async function repositories(info) {
+async function collaborators(info) {
   const {repo, ctx} = info
   const {collaborators, org, query} = ctx
   const {name} = repo

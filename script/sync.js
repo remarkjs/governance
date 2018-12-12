@@ -20,15 +20,16 @@ var config = {
 }
 
 var orgs = [
-  'unifiedjs',
-  'remarkjs',
-  'rehypejs',
-  'retextjs',
-  'redotjs',
-  'mdx-js',
-  'micromark',
-  'syntax-tree',
-  'vfile'
+  'remarkjs'
+  // 'unifiedjs',
+  // 'remarkjs',
+  // 'rehypejs',
+  // 'retextjs',
+  // 'redotjs',
+  // 'mdx-js',
+  // 'micromark',
+  // 'syntax-tree',
+  // 'vfile'
 ]
 
 pSeries(orgs.map(org => () => run({...config, org}))).then(
