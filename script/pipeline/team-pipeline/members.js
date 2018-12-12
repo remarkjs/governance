@@ -1,68 +1,81 @@
 'use strict'
 
 var chalk = require('chalk')
+var pSeries = require('p-series')
 var difference = require('arr-diff')
 var find = require('../util/find')
-var {users} = require('../util/clean')
-var {childTeamAccept} = require('../constants')
+var legacyId = require('../util/to-legacy-id')
 
 module.exports = members
 
-async function members({team, ctx}) {
-  var {paginate, request, structure} = ctx
-  var teamStructure = structure.find(x => x.name === team.name)
-  var definition
-  var maintainers
-  var members
-  var all
-  var allTeamMembers
-  var teamMembers
+async function members(info) {
+  const {structure, ctx, team} = info
+  const {id} = team
+  const {query, request} = ctx
+  const {name, humans} = structure
+  const maintainers = find(ctx, humans.maintainer)
+  const members = difference(find(ctx, humans.member), maintainers)
+  const all = members.concat(maintainers)
 
-  if (!teamStructure) {
-    console.log(
-      '  ' + chalk.blue('ℹ') + ' ignoring members of unstructured team %s',
-      team.name
-    )
-    return
-  }
-
-  definition = teamStructure.humans
-  maintainers = find(ctx, definition.maintainer)
-  members = difference(find(ctx, definition.member), maintainers)
-  all = members.concat(maintainers)
-
-  allTeamMembers = await paginate('GET /teams/:team/members', {
-    team: team.id,
-    headers: {accept: childTeamAccept}
-  }).then(users)
-
-  teamMembers = await Promise.all(
-    allTeamMembers.map(({name}) =>
-      request('GET /teams/:team/memberships/:name', {
-        team: team.id,
-        name,
-        headers: {accept: childTeamAccept}
-      }).then(({data}) => ({name, role: data.role}))
-    )
+  // To do: paginate.
+  const response = await query(
+    `
+      query($id: ID!) {
+        node(id: $id) {
+          ... on Team {
+            members(first: 100, membership: IMMEDIATE) {
+              edges {
+                role
+                node {
+                  login
+                }
+              }
+            }
+            invitations(first: 100) {
+              nodes {
+                invitee {
+                  login
+                }
+                role
+              }
+            }
+          }
+        }
+      }
+    `,
+    {id}
   )
 
+  const node = response.data.node
+  const invitations = node.invitations.nodes
+  const ghMembers = node.members.edges.map(({node, role}) => ({
+    login: node.login,
+    role: role.toLowerCase()
+  }))
+
+  // To do: warn on invitations.
+  if (invitations.length !== 0) {
+    console.log('To do: add invitations support: ', invitations)
+  }
+
   // Remove
-  teamMembers
-    .filter(x => !all.find(y => y === x.name))
-    .forEach(x => {
+  ghMembers
+    .filter(({login}) => !all.find(y => y === login))
+    .forEach(({login}) => {
       console.log(
         '  ' + chalk.red('✖') + ' @%s should not be in team %s',
-        x.name,
-        team.name
+        login,
+        name
       )
     })
 
   // Current members with wrong roles.
-  teamMembers.forEach(({role, name}) => {
-    var expected = maintainers.includes(name) ? 'maintainer' : 'member'
+  ghMembers.forEach(({role, login}) => {
+    var expected = maintainers.includes(login) ? 'maintainer' : 'member'
 
     // Core team members are always maintainers, regardless of what’s otherwise
     // expected.
+    // To do: don’t hardcode this.
     if (find(ctx, 'core/!emeritus')) {
       return
     }
@@ -70,38 +83,34 @@ async function members({team, ctx}) {
     if (expected !== role) {
       console.log(
         '  ' + chalk.red('✖') + ' @%s should have role %s instead of %s in %s',
-        name,
+        login,
         expected,
         role,
-        team.name
+        name
       )
     }
   })
 
-  // Add missing humans. Note that this will add pending humans again.
-  await Promise.all(
+  // Add missing humans.
+  // Note that this will add pending humans again.
+  // To do: ignore pending humans.
+  await pSeries(
     all
-      .filter(name => !teamMembers.find(y => y.name === name))
-      .map(name => {
-        var role = maintainers.includes(name) ? 'maintainer' : 'member'
-
+      .filter(name => !ghMembers.find(y => y.login === name))
+      .map(name => () => {
+        const role = maintainers.includes(name) ? 'maintainer' : 'member'
         return request('PUT /teams/:team/memberships/:name', {
-          team: team.id,
           name,
+          team: legacyId(id),
           role
         }).then(() => {
           console.log(
-            '  ' + chalk.green('✔') + ' add @%s to %s with role %s',
+            '  ' + chalk.green('✔') + ' add @%s to %s as %s',
             name,
-            team.name,
+            structure.name,
             role
           )
         })
       })
   )
-
-  return {
-    team,
-    ctx
-  }
 }

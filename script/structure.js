@@ -2,39 +2,39 @@ module.exports = [
   {
     name: 'emeritus',
     description: 'Past members of the @:org organization team',
-    repositories: {scope: ':org/*', right: 'pull'},
+    repositories: {scope: ':org/*', right: 'READ'},
     humans: {member: ':orgTeam/emeritus', maintainer: ':orgTeam/admin'}
   },
   {
     name: 'members',
     description: 'The @:org organization team',
-    repositories: {scope: ':org/*', right: 'pull'},
+    repositories: {scope: ':org/*', right: 'READ'},
     humans: {member: ':orgTeam/!emeritus', maintainer: ':orgTeam/admin'}
   },
   {
     name: 'mergers',
     parent: 'members',
     description: '@:org members with write rights',
-    repositories: {scope: ':org/*', right: 'push'},
+    repositories: {scope: ':org/*', right: 'WRITE'},
     humans: {member: ':orgTeam/write', maintainer: ':orgTeam/admin'}
   },
   {
     name: 'releasers',
     parent: 'members',
     description: '@:org members with release rights',
-    repositories: {scope: ':org/*', right: 'admin'},
+    repositories: {scope: ':org/*', right: 'ADMIN'},
     humans: {member: ':orgTeam/admin', maintainer: ':orgTeam/lead'}
   },
   {
     name: 'moderators',
     description: 'The @:collective collective moderation team',
-    repositories: {scope: ':org/*', right: 'admin'},
+    repositories: {scope: ':org/*', right: 'ADMIN'},
     humans: {member: 'moderation/!emeritus', maintainer: ':orgTeam/lead'}
   },
   {
     name: 'core',
     description: 'The @:collective collective core team',
-    repositories: {scope: ':org/*', right: 'admin'},
+    repositories: {scope: ':org/*', right: 'ADMIN'},
     humans: {member: 'core/!emeritus', maintainer: ':orgTeam/lead'}
   }
 ]

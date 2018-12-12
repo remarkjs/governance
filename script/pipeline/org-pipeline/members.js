@@ -1,54 +1,83 @@
 'use strict'
 
 var chalk = require('chalk')
+var pSeries = require('p-series')
 var find = require('../util/find')
-
-var concat = [].concat
 
 module.exports = members
 
+const concat = [].concat
+
 async function members(ctx) {
-  var {org, request, structure} = ctx
+  const {org, query, request, structure} = ctx
+  // To do: don’t hardcode this.
+  const admins = find(ctx, 'core/!emeritus')
+  const defs = structure.map(({humans}) => [humans.member, humans.maintainer])
+  const groups = concat.apply([], concat.apply([], defs).map(x => find(ctx, x)))
+  const members = [...new Set(groups)].map(login => ({
+    login,
+    role: admins.includes(login) ? 'ADMIN' : 'MEMBER'
+  }))
+
   console.log(chalk.bold('members') + ' for %s', org)
-  var admins = find(ctx, 'core/!emeritus')
-  var defs = structure.map(({humans}) => [humans.member, humans.maintainer])
-  var groups = concat.apply([], concat.apply([], defs).map(x => find(ctx, x)))
-  var users = [...new Set(groups)]
-  var orgMembers = await Promise.all(
-    ctx.ghMembers.map(({name}) =>
-      request('GET /orgs/:org/memberships/:name', {org, name}).then(
-        ({data}) => ({name, role: data.role})
-      )
-    )
+
+  // To do: paginate.
+  const {data} = await query(
+    `
+      query($org: String!) {
+        organization(login: $org) {
+          membersWithRole(first: 100) {
+            edges {
+              role
+              node {
+                login
+              }
+            }
+          }
+        }
+      }
+    `,
+    {org}
   )
 
-  orgMembers.forEach(({name, role}) => {
-    var expected = admins.includes(name)
-      ? 'admin'
-      : users.includes(name)
-      ? 'member'
-      : null
+  const ghMembers = data.organization.membersWithRole.edges.map(
+    ({node, role}) => ({...node, role})
+  )
 
-    // Warn if users are not on teams: they shouldn’t be in the org.
-    if (!expected) {
+  // Remove
+  ghMembers
+    .filter(x => !members.find(y => x.login === y.login))
+    .forEach(({login, role}) => {
       console.log(
-        '  ' + chalk.red('✖') + ' @%s should not be in the organization',
-        name
-      )
-      return
-    }
-
-    // Warn if users have incorrect rights.
-    // Core team members should be admins (owners), other members should not.
-    if (role !== expected) {
-      console.log(
-        '  ' +
-          chalk.red('✖') +
-          ' @%s should have the role %s instead of %s in the organization',
-        name,
-        expected,
+        '  ' + chalk.red('✖') + ' @%s should not be in %s as %s',
+        login,
+        org,
         role
       )
-    }
-  })
+    })
+
+  // Add or update humans with missing or unexpected roles.
+  // Note that this will add pending humans again.
+  // To do: ignore pending humans.
+  await pSeries(
+    members
+      .filter(x => {
+        const ghMember = ghMembers.find(y => x.login === y.login)
+        return !ghMember || ghMember.role !== x.role
+      })
+      .map(({login, role}) => () => {
+        return request('PUT /orgs/:org/memberships/:login', {
+          login,
+          org,
+          role
+        }).then(() => {
+          console.log(
+            '  ' + chalk.green('✔') + ' add @%s to %s as %s',
+            login,
+            org,
+            role
+          )
+        })
+      })
+  )
 }

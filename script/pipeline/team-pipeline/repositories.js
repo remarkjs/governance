@@ -1,40 +1,63 @@
 'use strict'
 
 var chalk = require('chalk')
+var pSeries = require('p-series')
 var {Minimatch} = require('minimatch')
 var {childTeamAccept} = require('../constants')
 var interpolate = require('../util/interpolate')
-var {repos} = require('../util/clean')
+var legacyId = require('../util/to-legacy-id')
 
 module.exports = repositories
 
-async function repositories({team, ctx}) {
-  var {org, structure, ghRepos, request, paginate} = ctx
-  var headers = {accept: childTeamAccept}
-  var teamStructure = structure.find(x => x.name === team.name)
-  var definition
-  var right
-  var match
-  var expected
-  var teamRepos
+// Add repositories to the team with the correct permissions.
+async function repositories(info) {
+  const {ctx, structure, team} = info
+  const {org, query, request} = ctx
+  const {repositories} = structure
+  const {id} = team
+  const {right, scope} = repositories
+  const match = new Minimatch(interpolate(ctx, scope))
 
-  if (!teamStructure) {
-    console.log(
-      '  ' + chalk.blue('ℹ') + ' ignoring repos of unstructured team %s',
-      team.name
-    )
-    return
-  }
+  // To do: load org repositories only once, not for every team.
+  // To do: paginate.
+  const {data} = await query(
+    `
+      query($org: String!, $id: ID!) {
+        node(id: $id) {
+          ... on Team {
+            repositories(first: 100) {
+              edges {
+                permission
+                node {
+                  nameWithOwner
+                  name
+                }
+              }
+            }
+          }
+        }
+        organization(login: $org) {
+          repositories(first: 100) {
+            nodes {
+              nameWithOwner
+              name
+            }
+          }
+        }
+      }
+    `,
+    {id, org}
+  )
 
-  definition = teamStructure.repositories
-  right = definition.right
-  match = new Minimatch(interpolate(ctx, definition.scope))
-  expected = ghRepos.filter(repo => match.match(full(repo)))
+  const ghRepos = data.organization.repositories.nodes
+  const teamRepos = data.node.repositories.edges.map(({permission, node}) => ({
+    ...node,
+    permission
+  }))
 
-  teamRepos = await paginate('GET /teams/:team/repos', {
-    team: team.id,
-    headers
-  }).then(repos)
+  const expected = ghRepos.filter(({nameWithOwner}) =>
+    match.match(nameWithOwner)
+  )
 
   // Remove
   teamRepos
@@ -43,46 +66,32 @@ async function repositories({team, ctx}) {
       console.log(
         '  ' + chalk.red('✖') + ' %s should not be governed by %s',
         x.name,
-        team.name
+        structure.name
       )
     })
 
-  var incorrect = [].concat(
+  const incorrect = [].concat(
     // Current repos with wrong permissions.
-    teamRepos.filter(repo => {
-      var perms = repo.permissions
-      var perm = perms.admin ? 'admin' : perms.push ? 'push' : 'pull'
-      return perm !== right
-    }),
+    teamRepos.filter(({permission}) => permission !== right),
     // Missing repos
     expected.filter(x => !teamRepos.find(y => y.name === x.name))
   )
 
-  await Promise.all(
-    incorrect.map(({name}) =>
-      request('PUT /teams/:team/repos/:org/:repo', {
-        team: team.id,
-        org,
-        repo: name,
+  await pSeries(
+    incorrect.map(({nameWithOwner}) => () => {
+      request('PUT /teams/:team/repos/:nameWithOwner', {
+        team: legacyId(id),
+        nameWithOwner,
         permission: right,
         headers: {accept: childTeamAccept}
       }).then(() => {
         console.log(
           '  ' + chalk.green('✔') + ' set permissions for %s on %s to %s',
-          team.name,
-          name,
+          structure.name,
+          nameWithOwner,
           right
         )
       })
-    )
+    })
   )
-
-  return {
-    team,
-    ctx
-  }
-
-  function full(repo) {
-    return [ctx.org, repo.name].join('/')
-  }
 }

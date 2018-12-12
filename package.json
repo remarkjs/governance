@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@octokit/graphql": "^1.0.0",
+    "atob": "^2.1.2",
     "chalk": "^2.4.1",
     "prettier": "^1.14.2",
     "remark": "^10.0.0",

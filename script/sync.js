@@ -10,7 +10,8 @@ var structure = require('./structure')
 var run = promisify(require('./pipeline').run)
 
 var config = {
-  token: process.env.GH,
+  // Note: TOKEN needs `admin:org` and `repo` scopes.
+  token: process.env.GITHUB_TOKEN,
   collective: 'unifiedjs',
   structure,
   teams,
