@@ -19,6 +19,9 @@ async function repos(ctx) {
         organization(login: $org) {
           repositories(first: 100) {
             nodes {
+              defaultBranchRef {
+                name
+              }
               name
             }
           }
