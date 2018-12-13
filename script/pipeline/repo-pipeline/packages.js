@@ -17,6 +17,7 @@ async function packages(info) {
     `
       query($org: String!, $name: String!) {
         repository(owner: $org, name: $name) {
+          isArchived
           dependencyGraphManifests() {
             nodes {
               filename
@@ -33,6 +34,11 @@ async function packages(info) {
       headers: {Accept: dependencyGraphAccept}
     }
   )
+
+  if (data.repository.isArchived) {
+    console.log('  ' + chalk.blue('ℹ') + ' repo %s is archived', name)
+    return
+  }
 
   const manifests = data.repository.dependencyGraphManifests.nodes
 
