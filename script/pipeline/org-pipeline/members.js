@@ -69,7 +69,8 @@ async function members(ctx) {
         return request('PUT /orgs/:org/memberships/:login', {
           login,
           org,
-          role
+          // Note: `ADMIN` is v4 (uppercase), `admin` is v3 (lowercase).
+          role: role.toLowerCase()
         }).then(() => {
           console.log(
             '  ' + chalk.green('✔') + ' add @%s to %s as %s',
