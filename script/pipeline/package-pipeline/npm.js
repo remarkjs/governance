@@ -5,7 +5,7 @@ var chalk = require('chalk')
 module.exports = npm
 
 async function npm(info) {
-  const {ctx, pkg, repo} = info
+  const {pkg, repo} = info
   const {private: priv, name} = pkg
 
   if (priv) {
@@ -55,5 +55,5 @@ async function npm(info) {
   //
 
   console.log('repo: ', repo, pkg)
-  throw 1
+  throw new Error('!')
 }
