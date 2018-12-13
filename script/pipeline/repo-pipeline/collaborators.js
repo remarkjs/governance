@@ -26,6 +26,7 @@ async function collaborators(info) {
     `
       query($org: String!, $name: String!) {
         repository(owner: $org, name: $name) {
+          isArchived
           direct: collaborators(first: 100, affiliation: DIRECT) {
             edges {
               permission
@@ -47,6 +48,11 @@ async function collaborators(info) {
     `,
     {org, name}
   )
+
+  if (data.repository.isArchived) {
+    console.log('  ' + chalk.blue('ℹ') + ' repo %s is archived', name)
+    return
+  }
 
   // Direct is a list of people with specific rights set on the repo.
   // Even if they’re also on a team.
