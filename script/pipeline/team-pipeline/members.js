@@ -47,16 +47,24 @@ async function members(info) {
   )
 
   const node = response.data.node
-  const invitations = node.invitations.nodes
+  const invitations = node.invitations.nodes.map(({invitee, role}) => ({
+    ...invitee,
+    role
+  }))
   const ghMembers = node.members.edges.map(({node, role}) => ({
-    login: node.login,
+    ...node,
     role: role.toLowerCase()
   }))
 
-  // To do: warn on invitations.
-  if (invitations.length !== 0) {
-    console.log('To do: add invitations support: ', invitations)
-  }
+  // Warn on pending invites
+  invitations.forEach(({role, login}) => {
+    console.log(
+      '  ' + chalk.blue('ℹ') + ' @%s should accept their invite for %s as %s',
+      login,
+      name,
+      role
+    )
+  })
 
   // Remove
   ghMembers
@@ -93,10 +101,10 @@ async function members(info) {
 
   // Add missing humans.
   // Note that this will add pending humans again.
-  // To do: ignore pending humans.
   await pSeries(
     all
       .filter(name => !ghMembers.find(y => y.login === name))
+      .filter(name => !invitations.find(y => y.login === name))
       .map(name => () => {
         const role = maintainers.includes(name) ? 'maintainer' : 'member'
         return request('PUT /teams/:team/memberships/:name', {
