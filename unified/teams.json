@@ -38,6 +38,7 @@
     "lead": "wooorm",
     "members": {
       "ChristianMurphy": "write",
+      "fazouane-marouane": "write",
       "johno": "admin",
       "Murderlon": "write",
       "Rokt33r": "write",
@@ -84,6 +85,7 @@
     "scope": "micromark/*",
     "lead": "wooorm",
     "members": {
+      "fazouane-marouane": "write",
       "johno": "write",
       "Murderlon": "write",
       "vhf": "write",

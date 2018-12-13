@@ -14,6 +14,9 @@ I’m going to try and write some code to streamline that here.
 *   Christian Murphy
     ([**@ChristianMurphy**](https://github.com/ChristianMurphy))
     &lt;[christian.murphy.42@gmail.com](mailto:christian.murphy.42@gmail.com)>
+*   Marouane Fazouane
+    ([**@fazouane-marouane**](https://github.com/fazouane-marouane))
+    &lt;[fazouanem3@gmail.com](mailto:fazouanem3@gmail.com)>
 *   John Otander
     ([**@johno**](https://github.com/johno))
     &lt;[johnotander@gmail.com](mailto:johnotander@gmail.com)>
