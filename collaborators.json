@@ -36,6 +36,12 @@
     }
   },
   {
+    "scope": "syntax-tree/mdast-util-toc",
+    "collaborators": {
+      "BarryThePenguin": "Jonathan Haines <jonno.haines@gmail.com> (https://barrythepenguin.github.io)"
+    }
+  },
+  {
     "scope": "vfile/vfile-reporter-pretty",
     "collaborators": {
       "sindresorhus": "Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)",
