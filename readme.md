@@ -1,81 +1,50 @@
 # Governance
 
-This repo will describe how [**@remarkjs**](https://github.com/remarkjs) is
-governed.
-We’re currently drafting that out in [unifiedjs/governance#2](https://github.com/unifiedjs/governance/issues/2).
+remark is part of the [unified collective][collective] and is governed
+by the [remark team][team].
 
-There’s a lot of churn around handling 200 projects with many different teams.
-I’m going to try and write some code to streamline that here.
+## Policy
 
-<!-- members-remark start -->
+The following policies describe the aspects of governance for the collective in
+detail:
 
-## Members
+*   [Decisions policy][decisions-policy] — how decisions are made
+*   [Members policy][members-policy] — how people participate
+*   [Moderation policy][moderation-policy] — how the code of conduct is enforced
+*   [Organizations policy][organizations-policy] — how organizations are managed
+*   [Permissions policy][permissions-policy] — the permissions members have
+*   [Teams policy][collective] — how the team operates
 
-*   Christian Murphy
-    ([**@ChristianMurphy**](https://github.com/ChristianMurphy))
-    &lt;[christian.murphy.42@gmail.com](mailto:christian.murphy.42@gmail.com)>
-*   John Otander
-    ([**@johno**](https://github.com/johno))
-    &lt;[johnotander@gmail.com](mailto:johnotander@gmail.com)>
-*   Merlijn Vos
-    ([**@Murderlon**](https://github.com/Murderlon))
-    &lt;[merlijn@soverin.net](mailto:merlijn@soverin.net)>
-*   Junyoung Choi
-    ([**@Rokt33r**](https://github.com/Rokt33r))
-    &lt;[fluke8259@gmail.com](mailto:fluke8259@gmail.com)>
-*   Nikita Sobolev
-    ([**@sobolevn**](https://github.com/sobolevn))
-    &lt;[mail@sobolevn.me](mailto:mail@sobolevn.me)>
-*   Victor Felder
-    ([**@vhf**](https://github.com/vhf))
-    &lt;[victor@draft.li](mailto:victor@draft.li)>
-*   Titus Wormer
-    ([**@wooorm**](https://github.com/wooorm))
-    &lt;[tituswormer@gmail.com](mailto:tituswormer@gmail.com)>
-    (**lead**)
-*   Zeke Sikelianos
-    ([**@zeke**](https://github.com/zeke))
-    &lt;[zeke@sikelianos.com](mailto:zeke@sikelianos.com)>
-*   Mudit Ameta
-    ([**@zeusdeux**](https://github.com/zeusdeux))
-    &lt;[zeusdeux@gmail.com](mailto:zeusdeux@gmail.com)>
+There are no additional policies defined on the organization level.
 
-<!-- members-remark end -->
+## Spaces
 
-## Working
+The following spaces are governed by the team:
 
-This repository houses a script (`script/github-teams.js`) that cleans the
-GitHub organisation.
+*   GitHub: [github.com/remarkjs](https://github.com/remarkjs)
+*   npm: [npmjs.com/~remarkjs](https://www.npmjs.com/org/remarkjs)
+*   Spectrum: [spectrum.chat/unified/remark](https://spectrum.chat/unified/remark)
 
-It sets up four teams and syncs all repos and humans under the organisation
-with them:
+## License
 
-*   A main team, **members**, that governs all repositories under the
-    organisation with **read** access.
-    All humans are invited to this team as **member**s.
-    Humans with a `release` role are invited to this team as **maintainer**s.
-*   An **emeriti** team, that governs all repositories under the organisation
-    with **read** access.
-    Humans with an `emeritus` role are invited to this team as **member**s.
-    Humans with a `release` role are invited to this team as **maintainer**s.
-*   A **mergers** team, that governs all repositories under the organisation
-    with **write** access.
-    Humans with a `merge` role are invited to this team as **member**s.
-    Humans with a `release` role are invited to this team as **maintainer**s.
-*   A **releasers** team, that governs all repositories under the organisation
-    with **admin** access.
-    Humans with a `release` role are invited to this team as **member**s.
-    Humans with a `lead` role are invited to this team as **maintainer**s.
+[CC-BY-4.0][license] © [Titus Wormer][author].
 
-People on these teams that shouldn’t be there, are warned about or updated.
+<!-- Definitions -->
 
-Additionally, it checks all members of the organisation.
-It warns about people not on teams warned about and people without 2fa turned
-on.
-Someone with admin rights should contact these people about their removal, and
-remove them.
+[license]: https://creativecommons.org/licenses/by/4.0/
 
-Finally, it checks all repositories, checking that only outside collaborators
-defined in `collaborators.json` have write rights.
-Someone with admin rights should contact these people about their removal, and
-remove them.
+[author]: https://wooorm.com
+
+[collective]: https://github.com/unifiedjs/collective
+
+[team]: https://github.com/unifiedjs/collective#remark-team
+
+[decisions-policy]: https://github.com/unifiedjs/collective/blob/master/decisions.md
+
+[members-policy]: https://github.com/unifiedjs/collective/blob/master/members.md
+
+[moderation-policy]: https://github.com/unifiedjs/collective/blob/master/moderation.md
+
+[organizations-policy]: https://github.com/unifiedjs/collective/blob/master/organizations.md
+
+[permissions-policy]: https://github.com/unifiedjs/collective/blob/master/permissions.md
