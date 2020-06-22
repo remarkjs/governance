@@ -39,12 +39,12 @@ The following spaces are governed by the team:
 
 [team]: https://github.com/unifiedjs/collective#remark-team
 
-[decisions-policy]: https://github.com/unifiedjs/collective/blob/master/decisions.md
+[decisions-policy]: https://github.com/unifiedjs/collective/blob/HEAD/decisions.md
 
-[members-policy]: https://github.com/unifiedjs/collective/blob/master/members.md
+[members-policy]: https://github.com/unifiedjs/collective/blob/HEAD/members.md
 
-[moderation-policy]: https://github.com/unifiedjs/collective/blob/master/moderation.md
+[moderation-policy]: https://github.com/unifiedjs/collective/blob/HEAD/moderation.md
 
-[organizations-policy]: https://github.com/unifiedjs/collective/blob/master/organizations.md
+[organizations-policy]: https://github.com/unifiedjs/collective/blob/HEAD/organizations.md
 
-[permissions-policy]: https://github.com/unifiedjs/collective/blob/master/permissions.md
+[permissions-policy]: https://github.com/unifiedjs/collective/blob/HEAD/permissions.md
