@@ -23,7 +23,6 @@ The following spaces are governed by the team:
 
 *   GitHub: [github.com/remarkjs](https://github.com/remarkjs)
 *   npm: [npmjs.com/~remarkjs](https://www.npmjs.com/org/remarkjs)
-*   Spectrum: [spectrum.chat/unified/remark](https://spectrum.chat/unified/remark)
 
 ## License
 
